@@ -1,0 +1,15 @@
+{
+    "name": "mathieu/php-game",
+    "autoload": {
+        "psr-4": {
+            "Mathieu\\PhpGame\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mathieu-Berthet",
+            "email": "berthetmathieu@free.fr"
+        }
+    ],
+    "require": {}
+}
