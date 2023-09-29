@@ -1,36 +1,26 @@
 <?php
 
-class dbConnector
+namespace ProjetGames;
+
+use PDO;
+class dbConnector extends PDO
 {
-    private static $instance = null;
+    private string $dbName = "SquaresGame";
+    private string $nameServer = "127.0.0.1";
+    private string $port = "6603";
+    private static dbConnector $instance;
 
-    private function __construct()
+    public function __construct()
     {
-        $dbName = "SquaresGame";
-        $nameServer = "localhost";
-        $userName = "root";
-        $password= "helloworld";
-        $port = 6603;
-        try {
-            $connection = new PDO("mysql:host=$nameServer;dnName=$dbName port=$port", $userName, $password);
 
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            echo "Connection Successfull";
-        } catch (PDOException $error)
-        {
-            echo "Connection Failed : " . $error->getMessage();
-        }
+            parent::__construct("mysql:host={$this->nameServer};port={$this->port};dbname={$this->dbName}",
+            'root',
+            'helloworld');
     }
+
     public static function getInstance()
     {
-        if(self::$instance == null)
-        {
-            self::$instance = new dbConnector();
-        }
-        else
-        {
+        if (!isset(self::$instance)) self::$instance = new dbConnector();
             return self::$instance;
-        }
     }
 }
